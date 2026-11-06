@@ -42,15 +42,24 @@ main {
   padding: 0 var(--gutter) clamp(48px, 10vh, 120px);
 }
 
+.who {
+  display: flex; align-items: flex-end; gap: clamp(16px, 2vw, 28px);
+  margin: 0 0 clamp(40px, 8vh, 96px);
+}
+.pfp {
+  width: clamp(84px, 8vw, 128px); height: auto; flex: none;
+  image-rendering: pixelated;
+}
 .lede {
   font-family: 'Hedvig Letters Serif', ui-serif, Georgia, serif;
   font-size: clamp(28px, 3vw, 48px);
   letter-spacing: -0.045em;
   line-height: 1.05;
   color: var(--faint);
-  margin: 0 0 clamp(40px, 8vh, 96px);
+  margin: 0;
   max-width: 18em;
 }
+@media (max-width: 560px) { .who { flex-direction: column; align-items: flex-start; } }
 .lede .ink { color: var(--ink); }
 
 .rooms { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
