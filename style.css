@@ -65,7 +65,7 @@ main {
 .rooms { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
 .rooms a {
   display: grid;
-  grid-template-columns: 3.5em minmax(0, auto) 1fr auto;
+  grid-template-columns: 3.5em max-content minmax(0, 1fr) auto;
   align-items: baseline;
   gap: clamp(12px, 2vw, 32px);
   padding: clamp(14px, 2.2vw, 28px) 0 clamp(12px, 2vw, 24px);
@@ -80,6 +80,7 @@ main {
   line-height: .9;
   white-space: nowrap;
 }
+.what { min-width: 0; }
 .go { justify-self: end; transition: transform .5s var(--ease), color .35s var(--ease); }
 
 /* hovering one room quiets the other */
