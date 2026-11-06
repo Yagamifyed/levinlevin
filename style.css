@@ -47,9 +47,13 @@ main {
   margin: 0 0 clamp(40px, 8vh, 96px);
 }
 .pfp {
-  width: clamp(84px, 8vw, 128px); height: auto; flex: none;
+  /* whole multiples of the 48px punk, on its own blue-green, so scaling
+     can't leave a light hairline at the edge */
+  width: 96px; height: 96px; flex: none;
+  background: #749ba0;
   image-rendering: pixelated;
 }
+@media (min-width: 1200px) { .pfp { width: 144px; height: 144px; } }
 .lede {
   font-family: 'Hedvig Letters Serif', ui-serif, Georgia, serif;
   font-size: clamp(28px, 3vw, 48px);
