@@ -47,13 +47,13 @@ main {
   margin: 0 0 clamp(40px, 8vh, 96px);
 }
 .pfp {
-  /* whole multiples of the 48px punk, on its own blue-green, so scaling
-     can't leave a light hairline at the edge */
-  width: 96px; height: 96px; flex: none;
+  /* whole multiples of the 50px punk (scripts/punk.py), on its own blue-green,
+     so every pixel stays a sharp square and no light hairline shows at the edge */
+  width: 100px; height: 100px; flex: none;
   background: #749ba0;
   image-rendering: pixelated;
 }
-@media (min-width: 1200px) { .pfp { width: 144px; height: 144px; } }
+@media (min-width: 1200px) { .pfp { width: 150px; height: 150px; } }
 .lede {
   font-family: 'Hedvig Letters Serif', ui-serif, Georgia, serif;
   font-size: clamp(28px, 3vw, 48px);
@@ -66,23 +66,32 @@ main {
 @media (max-width: 560px) { .who { flex-direction: column; align-items: flex-start; } }
 .lede .ink { color: var(--ink); }
 
-.rooms { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+/* A room's name and subtitle share one block: the subtitle sits beside the name
+   when there is room and drops below it when there isn't, so the two can never
+   collide. The name's size is capped by the row's own width (about 6.4 times its
+   size for "OLD GROWTH", the longest), so it never runs past the edge either. */
+.rooms { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); container-type: inline-size; }
 .rooms a {
   display: grid;
-  grid-template-columns: 3.5em max-content minmax(0, 1fr) auto;
+  grid-template-columns: 3.5em minmax(0, 1fr) auto;
   align-items: baseline;
   gap: clamp(12px, 2vw, 32px);
   padding: clamp(14px, 2.2vw, 28px) 0 clamp(12px, 2vw, 24px);
   border-bottom: 1px solid var(--rule);
   transition: color .35s var(--ease);
 }
+.title {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  column-gap: clamp(12px, 2vw, 32px); row-gap: 6px;
+  min-width: 0;
+}
 .no, .what, .go { color: var(--mute); transition: color .35s var(--ease); }
 .name {
   font-family: 'Hedvig Letters Serif', ui-serif, Georgia, serif;
-  font-size: clamp(48px, 9vw, 168px);
+  font-size: min(9vw, 168px, calc((100cqi - 10rem) / 6.4));
   letter-spacing: -0.06em;
   line-height: .9;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 .what { min-width: 0; }
 .go { justify-self: end; transition: transform .5s var(--ease), color .35s var(--ease); }
@@ -94,8 +103,7 @@ main {
 .rooms a:hover .go { transform: translate(.15em, -.15em); }
 
 @media (max-width: 720px) {
-  .rooms a { grid-template-columns: 2.4em 1fr auto; row-gap: 6px; }
-  .what { grid-column: 2 / -1; }
-  .name { font-size: clamp(40px, 12vw, 72px); }
+  .rooms a { grid-template-columns: 2.4em minmax(0, 1fr) auto; }
+  .name { font-size: min(12vw, 72px, calc((100cqi - 6rem) / 6.4)); }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
