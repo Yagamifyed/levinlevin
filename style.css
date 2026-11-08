@@ -66,10 +66,9 @@ main {
 @media (max-width: 560px) { .who { flex-direction: column; align-items: flex-start; } }
 .lede .ink { color: var(--ink); }
 
-/* A room's name and subtitle share one block: the subtitle sits beside the name
-   when there is room and drops below it when there isn't, so the two can never
-   collide. The name's size is capped by the row's own width (6.4 times its size;
-   "The Museum", the longest, is about 5.4), so it never runs past the edge either. */
+/* Each room is its name alone. The name's size is capped by the row's own width
+   (6.4 times its size; "The Museum", the longest, is about 5.4), so it never
+   runs past the edge. */
 .rooms { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); container-type: inline-size; }
 .rooms a {
   display: grid;
@@ -80,26 +79,21 @@ main {
   border-bottom: 1px solid var(--rule);
   transition: color .35s var(--ease);
 }
-.title {
-  display: flex; flex-wrap: wrap; align-items: baseline;
-  column-gap: clamp(12px, 2vw, 32px); row-gap: 6px;
-  min-width: 0;
-}
-.no, .what, .go { color: var(--mute); transition: color .35s var(--ease); }
+.no, .go { color: var(--mute); transition: color .35s var(--ease); }
 .name {
   font-family: 'Hedvig Letters Serif', ui-serif, Georgia, serif;
   font-size: min(9vw, 168px, calc((100cqi - 10rem) / 6.4));
   letter-spacing: -0.06em;
   line-height: .9;
   overflow-wrap: anywhere;
+  min-width: 0;
 }
-.what { min-width: 0; }
 .go { justify-self: end; transition: transform .5s var(--ease), color .35s var(--ease); }
 
 /* hovering one room quiets the other */
 .rooms:hover a { color: var(--faint); }
-.rooms:hover a .no, .rooms:hover a .what, .rooms:hover a .go { color: var(--faint); }
-.rooms a:hover, .rooms a:hover .no, .rooms a:hover .what, .rooms a:hover .go { color: var(--ink); }
+.rooms:hover a .no, .rooms:hover a .go { color: var(--faint); }
+.rooms a:hover, .rooms a:hover .no, .rooms a:hover .go { color: var(--ink); }
 .rooms a:hover .go { transform: translate(.15em, -.15em); }
 
 @media (max-width: 720px) {
